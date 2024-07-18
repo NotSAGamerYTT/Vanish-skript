@@ -5,7 +5,7 @@ options:
 
 command /vanish:
 	aliases: /v
-	permission: system.mvppp
+	permission: system.mvp
 	permission message: &cYou don't have permission. 
 	trigger:
 		if {f.vanish.%player%} is true:
