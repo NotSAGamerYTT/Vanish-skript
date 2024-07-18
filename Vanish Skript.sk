@@ -1,0 +1,35 @@
+options:
+	actionbar: You are currently &cVANISHED
+	enablemessage: You are now invisible to other players!
+	disablemessage: You are now visible to other players!
+
+command /vanish:
+	aliases: /v
+	permission: system.mvppp
+	permission message: &cYou don't have permission. 
+	trigger:
+		if {f.vanish.%player%} is true:
+			loop all players:
+				loop-value doesn't have permission "system.admin"
+				add loop-value to {_vanishtoplayer::*}
+			
+			reveal player from all players
+			set {f.vanish.%player%} to false
+			set action bar of player to coloured ""
+			send "&a{@disablemessage}"
+		else:
+			loop all players:
+				loop-value doesn't have permission "system.admin"
+				add loop-value to {_vanishtoplayer::*}
+			
+			hide the player from all players
+			set {f.vanish.%player%} to true
+			send "&a{@enablemessage}"
+			set action bar of player to "{@actionbar}"
+
+every 2 seconds:
+	loop all players:
+		if {f.vanish.%loop-player%} is true:
+			set action bar of loop-player to "{@actionbar}"
+
+                        stop
